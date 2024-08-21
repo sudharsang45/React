@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import DeveloperBios from './DeveloperBios';
+import DisplayBios from './DisplayBios';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         >
           Learn React
         </a>
-        <DeveloperBios title="Sudharsan Ganesan" favoriteLanguage="Python" yearStarted="2018"/>
+        <DisplayBios />
       </header>
     </div>
   );
