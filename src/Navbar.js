@@ -4,19 +4,19 @@ import { Link } from 'react-router-dom';
 
 function Navbar(){
     return(
-        <nav>
-            <ul>
-                <li>
+        <nav className="navbar navbar-expand-sm navbar-light bg-light">
+            <ul className="navbar-nav">
+                <li className="nav-item nav-link active">
                     <Link to="/">Home</Link>
                 </li>
-                <li>
+                <li className="nav-item nav-link">
                     <Link to="/developers">Developers</Link>
                 </li>
-                <li>
+                <li className="nav-item nav-link">
                     <Link to="/developers/add">AddDevelopers</Link>
                 </li>
             </ul>
-        </nav>
+        </nav>      
     )
 }                                                       
 
