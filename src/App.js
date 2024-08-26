@@ -1,9 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+//import './App.css';
+import React from 'react';
+import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DisplayBios from './DisplayBios';
 import AddDeveloper from './AddDeveloper';
-import React from 'react';
 import Developer from './Developer';
+import Home from './Home';
+import Navbar from './Navbar';
 
 /*
 function App() {
@@ -46,26 +48,16 @@ export class App extends React.Component {
   }
 
   render () {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <DisplayBios developers= { this.state.developers }/>
-          <AddDeveloper handleNewDeveloper = { this.handleNewDeveloper }/>
-        </header>
-      </div>
-    );
+    return(
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path="/" element={ <Home /> }/>
+          <Route path="/developers" element={ <DisplayBios developers= { this.state.developers }/> }/>
+          <Route path="/developers/add" element={ <AddDeveloper handleNewDeveloper = { this.handleNewDeveloper }/> }/>
+        </Routes>
+      </Router>
+    )
   }
 }
 
