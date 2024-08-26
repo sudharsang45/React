@@ -1,9 +1,9 @@
 class Developer {
-    constructor(id, firstName, lastName, favouriteLanguage, yearStarted){
+    constructor(id, firstName, lastName, favoriteLanguage, yearStarted){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.favouriteLanguage = favouriteLanguage;
+        this.favoriteLanguage = favoriteLanguage;
         this.yearStarted = yearStarted;
     }
 }

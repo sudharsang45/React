@@ -3,7 +3,7 @@ import React from 'react';
 import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DisplayBios from './DisplayBios';
 import AddDeveloper from './AddDeveloper';
-import Developer from './Developer';
+//import Developer from './Developer';
 import Home from './Home';
 import Navbar from './Navbar';
 
@@ -34,18 +34,29 @@ export class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      developers: [
+      /*developers: [
           new Developer(1, 'Sudharsan', 'Ganesan', 'Python', 2018),
           new Developer(2, 'John', 'Smith', 'C++', 2005)
-      ]
+      ]*/
+     developers: []
     };
   }
 
-  handleNewDeveloper = (dev) => {
+  componentDidMount() {
+      fetch('https://dev-bios-api-dot-cog01hprmn542jqme4w772bk1dxpr.uc.r.appspot.com/developers/all')
+        .then((response) => response.json())
+        .then((data) => {
+          this.setState({developers: data})
+          })
+        .catch(err   => console.log(err))     
+  } 
+
+  /*handleNewDeveloper = (dev) => {       
     dev.id = this.state.developers.length + 1;
     let newDev = [...this.state.developers, dev]; //taking the developers array from state and appending the new developer
     this.setState({developers: newDev});
-  }
+  }*/
+
 
   render () {
     return(
@@ -54,7 +65,7 @@ export class App extends React.Component {
         <Routes>
           <Route path="/" element={ <Home /> }/>
           <Route path="/developers" element={ <DisplayBios developers= { this.state.developers }/> }/>
-          <Route path="/developers/add" element={ <AddDeveloper handleNewDeveloper = { this.handleNewDeveloper }/> }/>
+          <Route path="/developers/add" element={ <AddDeveloper /> }/>
         </Routes>
       </Router>
     )
@@ -62,3 +73,5 @@ export class App extends React.Component {
 }
 
 export default App;
+
+//<Route path="/developers/add" element={ <AddDeveloper handleNewDeveloper = { this.handleNewDeveloper }/> }/>

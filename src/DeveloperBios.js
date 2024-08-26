@@ -6,7 +6,7 @@ function DeveloperBios(props) {
            <div className="card-body">
                <h1 className="card-title"> { props.developer.firstName } </h1>
                <p className="card-text">
-                   <span className="bold">Favorite Language: { props.developer.favouriteLanguage }</span>
+                   <span className="bold">Favorite Language: { props.developer.favoriteLanguage  }</span>
                </p>
                <p className="card-text">
                    <span className="bold">Year Started: { props.developer.yearStarted }</span>

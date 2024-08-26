@@ -7,7 +7,7 @@ class AddDeveloper extends React.Component {
         this.state = {
             firstName: '',
             lastName: '',
-            favouriteLanguage: '',
+            favoriteLanguage: '',
             yearStarted: null
         }
     }
@@ -20,7 +20,7 @@ class AddDeveloper extends React.Component {
         this.setState({
             [name]: value
         })
-    }
+    }   
 
     clearForm = () => {
         this.setState({firstName: '', lastName: '', favouriteLanguage: '', yearStarted: null});
@@ -29,11 +29,22 @@ class AddDeveloper extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.handleNewDeveloper(new Developer(null, this.state.firstName, this.state.lastName,
+        /*this.props.handleNewDeveloper(new Developer(null, this.state.firstName, this.state.lastName,
                                         this.state.favouriteLanguage, this.state.yearStarted)
-        );
+        );*/
 
-        this.clearForm();
+        let newDev = new Developer(null, this.state.firstName, this.state.lastName,this.state.favoriteLanguage, this.state.yearStarted);
+
+        fetch('https://dev-bios-api-dot-cog01hprmn542jqme4w772bk1dxpr.uc.r.appspot.com/developers/add', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newDev)    
+            }
+        )  
+        .then(() => this.clearForm())
+        .catch(err => console.log(err));            
     }
 
     render(){
