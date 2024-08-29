@@ -1,5 +1,5 @@
 //import './App.css';
-import React from 'react';
+import React, { Component } from 'react';
 import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DisplayBios from './DisplayBios';
 import AddDeveloper from './AddDeveloper';
@@ -30,7 +30,7 @@ function App() {
   );
 }*/
 
-export class App extends React.Component {
+export class App extends Component {
   constructor(props){
     super(props);
     this.state = {

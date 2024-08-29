@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import Developer from './Developer';
+import Developer from '../Model/Developer';
 
 function AddDeveloper () {
    /* constructor(props){
@@ -27,6 +27,13 @@ function AddDeveloper () {
     const [lastName, setLastName] = useState('');
     const [favoriteLanguage, setFavoriteLanguage] = useState('');
     const [yearStarted, setYearStarted] = useState(null);
+    const [isValidForm, setIsValidForm] = useState(false);
+    const [isDirtyForm, setIsDirtyForm] = useState(false);
+
+    useEffect(() => {
+        setIsValidForm(firstName && lastName && favoriteLanguage && yearStarted);
+        setIsDirtyForm(firstName || lastName || favoriteLanguage || yearStarted);
+    },[firstName, lastName, favoriteLanguage, yearStarted]);
 
     /*const clearForm = () => {
         setFirstName('');
@@ -79,11 +86,16 @@ function AddDeveloper () {
                             <input type="text" data-testid="yearStarted" name="yearStarted"  className="form-control" onChange={ (event) => setYearStarted(event.target.value) } />
                         </div>
                         <div className="form-group">
-                            <button type="submit"  className="btn btn-success" >Submit</button>
+                            <button type="submit"  className="btn btn-success" disabled = { !isValidForm }>Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
+            {
+                (!(isValidForm && isDirtyForm)) ?
+                <div style={{fontSize:'16px', color:'red'}}>All fields must be valid with values</div> :
+                <div></div>
+            }
         </div>
     );
     
