@@ -1,11 +1,13 @@
 //import './App.css';
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import {BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DisplayBios from './DisplayBios';
 import AddDeveloper from './AddDeveloper';
 //import Developer from './Developer';
 import Home from './Home';
 import Navbar from './Navbar';
+import AuthContext from '../Context';
+import Login from './Login';
 
 /*
 function App() {
@@ -30,26 +32,29 @@ function App() {
   );
 }*/
 
-export class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      /*developers: [
-          new Developer(1, 'Sudharsan', 'Ganesan', 'Python', 2018),
-          new Developer(2, 'John', 'Smith', 'C++', 2005)
-      ]*/
-     developers: []
-    };
-  }
+//export class App extends Component {
+//  constructor(props){
+//    super(props);
+//    this.state = {
+//      /*developers: [
+//          new Developer(1, 'Sudharsan', 'Ganesan', 'Python', 2018),
+//          new Developer(2, 'John', 'Smith', 'C++', 2005)
+//      ]*/
+//     developers: []
+//    };
+//  }
 
-  componentDidMount() {
-      fetch('https://dev-bios-api-dot-cog01hprmn542jqme4w772bk1dxpr.uc.r.appspot.com/developers/all')
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({developers: data})
-          })
-        .catch(err   => console.log(err))     
-  } 
+function App () {
+
+
+  //componentDidMount() {
+  //    fetch('https://dev-bios-api-dot-cog01hprmn542jqme4w772bk1dxpr.uc.r.appspot.com/developers/all')
+  //      .then((response) => response.json())
+  //      .then((data) => {
+  //        this.setState({developers: data})
+  //        })
+  //      .catch(err   => console.log(err))     
+  //} 
 
   /*handleNewDeveloper = (dev) => {       
     dev.id = this.state.developers.length + 1;
@@ -57,19 +62,23 @@ export class App extends Component {
     this.setState({developers: newDev});
   }*/
 
+  const {isLoggedIn} = useContext(AuthContext);
 
-  render () {
-    return(
-      <Router>
-        <Navbar/>
-        <Routes>
-          <Route path="/" element={ <Home /> }/>
-          <Route path="/developers" element={ <DisplayBios developers= { this.state.developers }/> }/>
-          <Route path="/developers/add" element={ <AddDeveloper /> }/>
-        </Routes>
-      </Router>
-    )
-  }
+  return(
+    <Router>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={ <Home /> }/>
+        <Route path="/developers" element={ <DisplayBios /> }/> 
+        {
+          isLoggedIn ?
+          <Route path="/developers/add" element={ <AddDeveloper /> }/> :
+          <></>
+        }
+        <Route path="/login" element={ <Login /> }/>
+      </Routes>
+    </Router>
+  )
 }
 
 export default App;

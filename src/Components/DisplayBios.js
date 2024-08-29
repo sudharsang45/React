@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 //import Developer from './Developer';
 import DeveloperBios from './DeveloperBios';
 
@@ -22,7 +22,18 @@ export class DisplayBios extends React.Component {
 }*/
 
 function DisplayBios(props) {
-    return props.developers.map(dev => <DeveloperBios developer={dev} key={dev.id}/>)
+    const [developers, setDevelopers] = useState([]);
+
+    useEffect(()=> {
+        fetch('https://dev-bios-api-dot-cog01hprmn542jqme4w772bk1dxpr.uc.r.appspot.com/developers/all')
+        .then((response) => response.json())
+        .then((data) => {
+          setDevelopers(data)
+          })
+        .catch(err   => console.log(err)) 
+    },[])
+
+    return developers.map(dev => <DeveloperBios developer={dev} key={dev.id}/>)
 }
 
 export default DisplayBios;
